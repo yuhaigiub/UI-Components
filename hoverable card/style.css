@@ -1,0 +1,166 @@
+:root {
+	--clr-neutral-900: hsl(207, 19%, 9%);
+	--clr-neutral-100: hsl(0, 0%, 100%);
+	--clr-neutral-400: hsl(316, 100%, 66%);
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	display: grid;
+	min-height: 100vh;
+	place-items: center;
+	line-height: 1.6;
+	font-family: sans-serif;
+	background-color: var(--clr-neutral-900);
+}
+
+/*     */
+
+.container {
+	display: flex;
+	column-gap: 1.5em;
+}
+
+.card {
+	flex: 1;
+	color: var(--clr-neutral-100);
+	border: none;
+	background-size: cover;
+	padding: 12rem 0 0;
+	max-width: 35ch; /*35 characters wide*/
+	height: 30em;
+	border-radius: 1rem;
+	overflow: hidden; /*prevent non-rounded children from overflowing*/
+
+	transform: scale(1);
+	transition: transform 500ms ease;
+}
+
+.card:hover,
+.card:focus-within {
+	transform: scale(1.05);
+}
+
+.card-content {
+	--padding: 1.5rem;
+	height: 100%;
+	padding: var(--padding);
+	background: linear-gradient(transparent, rgba(0, 0, 0, 0.8) 20%, rgba(0, 0, 0, 0.5) 80%);
+}
+
+/*taking into account mobile users (no hover)*/
+@media (hover) {
+	.card-content {
+		transform: translateY(65%);
+		transition: transform 500ms ease;
+	}
+}
+
+.card:hover .card-content,
+.card:focus-within .card-content {
+	transform: translateY(0%);
+	transition-delay: 500ms;
+}
+
+/*prevent weird firefox force overflow visible when keyboard-navigating*/
+.card:focus-within .card-content {
+	transition-duration: 0ms;
+}
+
+/*taking into account mobile users (no hover)*/
+@media (hover) {
+	.card-content > *:not(.card-title) {
+		opacity: 0;
+		transition: opacity 500ms linear;
+	}
+}
+
+.card:hover .card-content > *,
+.card:focus-within .card-content > * {
+	transition-delay: 650ms;
+	opacity: 1;
+}
+
+.card-title {
+	--font-size: 1.7rem;
+	--line-height: 2;
+	width: max-content;
+	max-width: 100%;
+	margin: 0;
+	padding-bottom: 1.5em;
+	font-size: var(--font-size);
+	line-height: var(--line-height);
+	max-height: calc(var(--font-size) * var(--line-height));
+	position: relative;
+	overflow: hidden;
+}
+
+.card-title::after {
+	content: "";
+	position: absolute;
+	left: calc(-1 * var(--padding));
+	bottom: -2px;
+	height: 6px;
+	width: calc(var(--padding) + 100%);
+	background-color: var(--clr-neutral-400);
+}
+
+/*taking into account mobile users (no hover)*/
+@media (hover) {
+	.card-title::after {
+		transform: scaleX(0);
+		transform-origin: left;
+		transition: transform 500ms ease;
+	}
+}
+
+.card:hover .card-title::after,
+.card:focus-within .card-title::after {
+	transform: scaleX(1);
+}
+
+.card-body {
+	--max-lines: 4;
+	--font-size: 1rem;
+	--line-height: 1.5;
+	font-size: var(--font-size);
+	line-height: var(--line-height);
+	max-height: calc(var(--max-lines) * var(--font-size) * var(--line-height));
+	color: rgba(255, 255, 255, 0.8);
+}
+
+.button {
+	cursor: pointer;
+	text-decoration: none;
+	color: var(--clr-neutral-100);
+	background-color: var(--clr-neutral-400);
+	display: inline-block;
+	padding: 0.5em 1em;
+	border-radius: 0.25em;
+	font-weight: 600;
+}
+
+.button:hover,
+.button:focus {
+	background-color: var(--clr-neutral-100);
+	color: var(--clr-neutral-900);
+}
+
+/*taking into account reduce motion users*/
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-delay: 0ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		transition-delay: 0ms !important;
+		scroll-behavior: auto !important;
+	}
+}
