@@ -1,0 +1,70 @@
+:root {
+	--black-500: rgb(44, 38, 38);
+	--white: rgb(255, 255, 255);
+	--neon-pink: hsl(317, 100%, 54%);
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	display: grid;
+	place-items: center;
+	min-height: 100vh;
+	font-family: sans-serif;
+	background: var(--black-500);
+}
+
+.neon-button {
+	cursor: pointer;
+	font-size: 4rem;
+	color: var(--neon-pink);
+	padding: 0.25em 0.75em;
+	border-radius: 0.2em;
+	border: 0.1em solid var(--neon-pink);
+	text-shadow: 0 0 0.25em var(--white), 0 0 0.1em var(--neon-pink);
+	box-shadow: inset 0 0 0.5em var(--neon-pink), 0 0 0.5em var(--neon-pink);
+	position: relative;
+	transform: scale(1);
+	transition: transform 700ms ease;
+}
+
+.neon-button:hover {
+	transform: scale(1.1);
+}
+
+.neon-button::before {
+	pointer-events: none;
+	content: "";
+	position: absolute;
+	background: var(--neon-pink);
+	top: 115%;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	transform: perspective(1em) rotateX(40deg) scale(1, 0.35);
+	filter: blur(1em);
+	opacity: 0.7;
+	transition: opacity 100ms linear;
+}
+
+.neon-button:hover::before {
+	opacity: 1;
+}
+
+.neon-button::after {
+	pointer-events: none;
+	content: "";
+	position: absolute;
+	inset: 0 0 0 0;
+	box-shadow: 0 0 2.5em 0.25em var(--neon-pink);
+	opacity: 0;
+	transition: opacity 100ms linear;
+}
+
+.neon-button:hover::after {
+	opacity: 1;
+}
