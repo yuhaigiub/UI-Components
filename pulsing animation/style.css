@@ -1,0 +1,144 @@
+:root {
+	--time: 5s;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	display: grid;
+	min-height: 100vh;
+	place-items: center;
+	background: black;
+}
+
+.play-button {
+	pointer-events: none;
+	aspect-ratio: 1/1;
+	width: 200px;
+	background-color: red;
+	border-radius: 50%;
+	display: grid;
+	place-items: center;
+	position: relative;
+	animation: pulse var(--time) ease infinite;
+	transform-style: preserve-3d;
+}
+
+.play-button::before {
+	pointer-events: none;
+	content: "";
+	border-radius: 50%;
+	position: absolute;
+	width: 100%;
+	aspect-ratio: 1/1;
+	border: 0.2em solid yellow;
+	transform: translateZ(-1em);
+	animation: pulse-outer var(--time) ease infinite;
+}
+
+.play-button::after {
+	pointer-events: none;
+	content: "";
+	border-radius: 50%;
+	position: absolute;
+	width: 100%;
+	aspect-ratio: 1/1;
+	border: 0.2em solid pink;
+	transform: translateZ(-1em);
+	animation: pulse-inner var(--time) ease infinite;
+}
+
+@keyframes pulse {
+	0% {
+		transform: scale(1);
+	}
+	8.33% {
+		transform: scale(1.2);
+	}
+	16.66% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1);
+	}
+	58.33% {
+		transform: scale(1.2);
+	}
+	66.66% {
+		transform: scale(1);
+	}
+}
+
+@keyframes pulse-inner {
+	0% {
+		transform: scale(1);
+		opacity: 0;
+	}
+	2% {
+		opacity: 1;
+	}
+	8.33% {
+		transform: scale(1.3);
+		opacity: 0;
+	}
+	16.66% {
+		transform: scale(1);
+		opacity: 0;
+	}
+	50% {
+		transform: scale(1);
+		opacity: 0;
+	}
+	52% {
+		opacity: 1;
+	}
+	58.33% {
+		transform: scale(1.3);
+		opacity: 0;
+	}
+	66.66% {
+		transform: scale(1);
+	}
+}
+
+@keyframes pulse-outer {
+	0% {
+		transform: scale(1);
+		opacity: 0;
+	}
+	2% {
+		opacity: 1;
+	}
+	8.33% {
+		transform: scale(1.5);
+		opacity: 0;
+	}
+	16.66% {
+		transform: scale(1);
+		opacity: 0;
+	}
+	50% {
+		transform: scale(1);
+		opacity: 0;
+	}
+	52% {
+		opacity: 1;
+	}
+	58.33% {
+		transform: scale(1.5);
+		opacity: 0;
+	}
+	66.66% {
+		transform: scale(1);
+		opacity: 0;
+	}
+}
+
+.play-button img {
+	width: 60%;
+	height: 60%;
+}
