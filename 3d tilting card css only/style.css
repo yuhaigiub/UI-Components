@@ -1,0 +1,166 @@
+:root {
+	--neutral-100: rgb(35, 27, 27);
+	--neutral-blue-400: rgb(78, 78, 234);
+	--neutral-green-400: rgb(78, 234, 78);
+	--neutral-900: rgb(255, 255, 255);
+	--scale-factor: 1.1;
+	--angle: 15deg;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	font-size: 1rem;
+	background-color: var(--neutral-100);
+	display: grid;
+	min-height: 100vh;
+	font-family: sans-serif;
+	place-items: center;
+}
+
+/*     */
+
+.tilting-card-css-only {
+	/* background-color: var(--neutral-green-400); */
+	width: 18em;
+	height: 25em;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(3, 1fr);
+	/* overflow: hidden; */
+	position: relative;
+}
+
+.mouse-position-tracker {
+	position: absolute;
+	inset: 0;
+	z-index: 100;
+	grid-row: auto;
+	grid-column: auto;
+	opacity: 0.3;
+}
+
+.mouse-position-tracker:nth-of-type(1) {
+	grid-row: 1/2;
+	grid-column: 1/2;
+	/* background-color: aqua; */
+}
+.mouse-position-tracker:nth-of-type(2) {
+	grid-row: 1/2;
+	grid-column: 2/3;
+	/* background-color: pink; */
+}
+.mouse-position-tracker:nth-of-type(3) {
+	grid-row: 1/2;
+	grid-column: 3/4;
+	/* background-color: red; */
+}
+.mouse-position-tracker:nth-of-type(4) {
+	grid-row: 2/3;
+	grid-column: 1/2;
+	/* background-color: purple; */
+}
+.mouse-position-tracker:nth-of-type(5) {
+	grid-row: 2/3;
+	grid-column: 2/3;
+	/* background-color: black; */
+}
+.mouse-position-tracker:nth-of-type(6) {
+	grid-row: 2/3;
+	grid-column: 3/4;
+	/* background-color: yellow; */
+}
+.mouse-position-tracker:nth-of-type(7) {
+	grid-row: 3/4;
+	grid-column: 1/2;
+	/* background-color: deeppink; */
+}
+.mouse-position-tracker:nth-of-type(8) {
+	grid-row: 3/4;
+	grid-column: 2/3;
+	/* background-color: blue; */
+}
+.mouse-position-tracker:nth-of-type(9) {
+	grid-row: 3/4;
+	grid-column: 3/4;
+	/* background-color: white; */
+}
+
+.tilting-card-css-only .card-content {
+	--perspective: 500px;
+	--rotationX: 0deg;
+	--rotationY: 0deg;
+
+	border-radius: 9px;
+	background-color: var(--neutral-900);
+	background-image: url(background.jpg);
+	background-size: cover;
+	color: var(--neutral-100);
+	text-shadow: 0 0 0.2em #fff;
+	text-align: center;
+	grid-row: 1/-1;
+	grid-column: 1/-1;
+	display: grid;
+	place-content: center;
+	transform: perspective(var(--perspective)) rotateX(var(--rotationX)) rotateY(var(--rotationY))
+		scale(var(--scale-factor));
+	transition: transform 500ms ease;
+}
+
+.mouse-position-tracker:nth-child(1):hover ~ .card-content {
+	background-color: red;
+	--rotationX: var(--angle);
+	--rotationY: calc(-1 * var(--angle));
+}
+
+.mouse-position-tracker:nth-child(2):hover ~ .card-content {
+	background-color: blue;
+	--rotationX: var(--angle);
+	--rotationY: 0deg;
+}
+
+.mouse-position-tracker:nth-child(3):hover ~ .card-content {
+	background-color: yellow;
+	--rotationX: var(--angle);
+	--rotationY: var(--angle);
+}
+
+.mouse-position-tracker:nth-child(4):hover ~ .card-content {
+	background-color: green;
+	--rotationX: 0deg;
+	--rotationY: calc(-1 * var(--angle));
+}
+
+.mouse-position-tracker:nth-child(5):hover ~ .card-content {
+	background-color: var(--neutral-900);
+	--rotationX: 0deg;
+	--rotationY: 0deg;
+}
+
+.mouse-position-tracker:nth-child(6):hover ~ .card-content {
+	background-color: purple;
+	--rotationX: 0deg;
+	--rotationY: var(--angle);
+}
+
+.mouse-position-tracker:nth-child(7):hover ~ .card-content {
+	background-color: deeppink;
+	--rotationX: calc(-1 * var(--angle));
+	--rotationY: calc(-1 * var(--angle));
+}
+
+.mouse-position-tracker:nth-child(8):hover ~ .card-content {
+	background-color: burlywood;
+	--rotationX: calc(-1 * var(--angle));
+	--rotationY: 0deg;
+}
+
+.mouse-position-tracker:nth-child(9):hover ~ .card-content {
+	background-color: aqua;
+	--rotationX: calc(-1 * var(--angle));
+	--rotationY: var(--angle);
+}
